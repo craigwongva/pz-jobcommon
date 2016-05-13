@@ -40,10 +40,10 @@ public class KafkaClientFactory {
 	 *            Cluster port
 	 * @return Kafka Producer
 	 */
-	public static KafkaProducer<String, String> getProducer(String host, String port) {
+	public static KafkaProducer<String, String> getProducer(String addresses) {
 		Properties props = new Properties();
 
-		props.put("bootstrap.servers", String.format("%s:%s", host, port));
+		props.put("bootstrap.servers", addresses);
 		props.put("acks", "all");
 		props.put("retries", 0);
 		props.put("batch.size", 0);
@@ -67,10 +67,10 @@ public class KafkaClientFactory {
 	 *            Group ID to join
 	 * @return Kafka Consumer
 	 */
-	public static KafkaConsumer<String, String> getConsumer(String host, String port, String group) {
+	public static KafkaConsumer<String, String> getConsumer(String addresses, String group) {
 		Properties props = new Properties();
 
-		props.put("bootstrap.servers", String.format("%s:%s", host, port));
+		props.put("bootstrap.servers", addresses);
 		props.put("group.id", group);
 		props.put("enable.auto.commit", "true");
 		props.put("auto.commit.interval.ms", "1000");
